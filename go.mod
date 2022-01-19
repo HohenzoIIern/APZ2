@@ -1,4 +1,4 @@
-module lab2
+module APZ2
 
 go 1.17
 

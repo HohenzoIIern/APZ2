@@ -1,10 +1,10 @@
 package main
 
 import (
+	"APZ2"
 	"flag"
 	"fmt"
 	"io"
-	"lab2"
 	"os"
 	"strings"
 )
@@ -47,7 +47,7 @@ func main() {
 		fmt.Print("no input\n")
 		return
 	}
-	handler := &lab2.ComputeHandler{
+	handler := &APZ2.ComputeHandler{
 		Input:  input,
 		Output: output,
 	}
