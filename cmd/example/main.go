@@ -20,11 +20,6 @@ func main() {
 	var input io.Reader = nil
 	var output = os.Stdout
 
-	handler := &APZ2.ComputeHandler{
-		Input:  input,
-		Output: output,
-	}
-
 	if *inputExpression != "" {
 		input = strings.NewReader(*inputExpression)
 	}
@@ -35,7 +30,7 @@ func main() {
 			f, err = os.Open("input.txt")
 		}
 		if err != nil {
-			fmt.Print("Error\n")
+			os.Stderr.WriteString("Error reading file!")
 		}
 		input = f
 	}
@@ -51,6 +46,11 @@ func main() {
 	if input == nil {
 		fmt.Print("no input\n")
 		return
+	}
+
+	handler := &APZ2.ComputeHandler{
+		Input:  input,
+		Output: output,
 	}
 
 	err := handler.Compute()
