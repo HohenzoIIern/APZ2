@@ -1,23 +1,31 @@
 package lab2
 
 import (
-	"fmt"
-	"testing"
-
 	"github.com/stretchr/testify/assert"
+	"testing"
 )
 
-func TestPrefixToPostfix(t *testing.T) {
-	res, err := PrefixToPostfix("+ 5 * - 4 2 3")
+func TestPrefixToInfix(t *testing.T) {
+	res, err := PrefixToInfix("+ * 22 b ^ c d")
 	if assert.Nil(t, err) {
-		assert.Equal(t, "4 2 - 3 * 5 +", res)
+		assert.Equal(t, "22 * b + c ^ d", res)
 	}
 }
 
-func ExamplePrefixToPostfix() {
-	res, _ := PrefixToPostfix("+ 2 2")
-	fmt.Println(res)
+func TestPrefixToInfixExample(t *testing.T) {
+	res, err := PrefixToInfix("+ - - - 11 a 3 4 * 12 a")
+	assert.Equal(t, nil, err)
+	assert.Equal(t, "11 - a - 3 - 4 + 12 * a", res)
+}
 
-	// Output:
-	// 2 2 +
+func TestPostfixToPrefixAllOperators(t *testing.T) {
+	res, err := PrefixToInfix("+ - 7 11 / 54 * 6 3")
+	assert.Nil(t, err)
+	assert.Equal(t, "7 - 11 + 54 / 6 * 3", res)
+}
+
+func TestPostfixToPrefixEmptyInput(t *testing.T) {
+	res, err := PrefixToInfix("")
+	assert.Equal(t, "", res)
+	assert.NotNil(t, err)
 }
