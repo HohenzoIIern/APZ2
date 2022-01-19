@@ -20,6 +20,11 @@ func main() {
 	var input io.Reader = nil
 	var output = os.Stdout
 
+	handler := &APZ2.ComputeHandler{
+		Input:  input,
+		Output: output,
+	}
+
 	if *inputExpression != "" {
 		input = strings.NewReader(*inputExpression)
 	}
@@ -47,10 +52,7 @@ func main() {
 		fmt.Print("no input\n")
 		return
 	}
-	handler := &APZ2.ComputeHandler{
-		Input:  input,
-		Output: output,
-	}
+
 	err := handler.Compute()
 	if err != nil {
 		fmt.Println(err.Error())

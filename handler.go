@@ -1,7 +1,6 @@
 package APZ2
 
 import (
-	"bufio"
 	"io"
 )
 
@@ -11,15 +10,19 @@ type ComputeHandler struct {
 }
 
 func (c *ComputeHandler) Compute() error {
-	fileScanner := bufio.NewScanner(c.Input)
-
-	for fileScanner.Scan() {
-		input := fileScanner.Text()
-		res, err := PrefixToInfix(input)
+	expr := ""
+	partial := make([]byte, 8)
+	for {
+		count, err := (c.Input).Read(partial)
 		if err != nil {
-			return err
+			break
 		}
-		c.Output.Write([]byte(res))
+		expr += string(partial[:count])
 	}
+	res, err := PrefixToInfix(expr)
+	if err != nil {
+		return err
+	}
+	c.Output.Write([]byte(res))
 	return nil
 }
