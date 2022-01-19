@@ -26,6 +26,9 @@ func main() {
 
 	if *inputFile != "" {
 		f, err := os.Open(*inputFile)
+		if f != nil {
+			f, err = os.Open("input.txt")
+		}
 		if err != nil {
 			fmt.Print("Error\n")
 		}
